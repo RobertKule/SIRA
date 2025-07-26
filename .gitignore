@@ -205,3 +205,14 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+
+sira_backend/venv/
+sira_backend/__pycache__/
+sira_backend/db.sqlite3
+authentification/__pycache__/
+authentification/migrations/
+gestion_academique/__pycache__/
+gestion_academique/migrations/
+
