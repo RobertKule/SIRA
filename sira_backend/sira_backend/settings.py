@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     
     'authentification',          # Votre app
     'gestion_academique',        # Votre app
+    
+    'docs',
+    'communication',  # Pour les notifications
 ]
 
 MIDDLEWARE = [
@@ -62,7 +65,9 @@ ROOT_URLCONF = 'sira_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'docs/templates',
+            BASE_DIR/ 'templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,7 +140,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    ),'DEFAULT_PAGINATION_CLASS': None,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 20,
 }
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),

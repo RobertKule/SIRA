@@ -1,0 +1,147 @@
+{% extends "documentation/base.html" %}
+
+{% block content %}
+<div class="space-y-8">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h1 class="text-3xl font-bold text-primary-light dark:text-primary-dark mb-2">Modèles de Données</h1>
+        <p class="text-gray-600 dark:text-gray-300">
+            Cette section documente la structure des données dans le système SIRA. Chaque modèle représente une entité clé
+            de l'application avec ses propriétés et relations.
+        </p>
+    </div>
+
+    <!-- Utilisateur Model -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-primary-light dark:bg-primary-dark px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Utilisateur</h2>
+            <p class="text-primary-lighter dark:text-primary-lightest text-sm">
+                Modèle de base pour tous les utilisateurs du système (étudiants, enseignants, administrateurs)
+            </p>
+        </div>
+        
+        <div class="p-6">
+            <div class="mb-4">
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">Description</h3>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Le modèle Utilisateur fournit les fonctionnalités d'authentification de base et les informations communes
+                    à tous les types d'utilisateurs. Il hérite de AbstractUser de Django.
+                </p>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Champ</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Type</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Description</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Obligatoire</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">email</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">EmailField</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">Identifiant unique pour la connexion</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">Oui</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">first_name</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">CharField</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">Prénom de l'utilisateur (max 50 caractères)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">Oui</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">last_name</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">CharField</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">Nom de famille (max 50 caractères)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">Oui</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">is_active</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">BooleanField</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">Indique si le compte est activé</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">Oui (défaut: True)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Étudiant Model -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden mt-8">
+        <div class="bg-secondary-light dark:bg-secondary-dark px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Étudiant</h2>
+            <p class="text-secondary-lighter dark:text-secondary-lightest text-sm">
+                Modèle étendant Utilisateur pour représenter les étudiants du système
+            </p>
+        </div>
+        
+        <div class="p-6">
+            <div class="mb-4">
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">Description</h3>
+                <p class="text-gray-600 dark:text-gray-400">
+                    Le modèle Étudiant ajoute des propriétés spécifiques aux étudiants comme le numéro de matricule,
+                    le programme d'études et les inscriptions aux cours.
+                </p>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Champ</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Type</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Description</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Relation</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">matricule</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">CharField</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">Numéro d'identification unique de l'étudiant</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">-</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">programme</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">ForeignKey</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">Programme d'études de l'étudiant</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">Programme</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">inscriptions</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">ManyToManyField</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">Cours auxquels l'étudiant est inscrit</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-400">Inscription</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-6 bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                <h4 class="text-md font-medium text-blue-800 dark:text-blue-200 mb-2">Note importante</h4>
+                <p class="text-blue-700 dark:text-blue-300 text-sm">
+                    Le modèle Étudiant hérite de toutes les propriétés du modèle Utilisateur de base. Les champs comme
+                    email, first_name et last_name sont accessibles via student.user.email, etc.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diagramme de relations -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-8">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Relations entre Modèles</h2>
+        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 border border-gray-200 dark:border-gray-600">
+            <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+                [Diagramme des relations entre modèles - à implémenter]
+            </div>
+            <p class="text-gray-600 dark:text-gray-300 mt-4">
+                Ce diagramme montre comment les différents modèles interagissent entre eux. Les flèches indiquent
+                les relations ForeignKey et les lignes doubles représentent les relations ManyToMany.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
