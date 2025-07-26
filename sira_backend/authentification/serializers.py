@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import re
@@ -12,8 +13,7 @@ def validate_phone_number(value):
     """
     if not re.match(r'^\+243[0-9]{9}$', value):
         raise ValidationError("Le numéro doit être au format congolais (+243XXXXXXXXX)")
-
-class CustomTokenObtainPairSerializer(serializers.TokenObtainPairSerializer):
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
     Serializer JWT personnalisé qui ajoute des informations utilisateur
     dans la réponse des tokens
@@ -42,31 +42,28 @@ class CustomTokenObtainPairSerializer(serializers.TokenObtainPairSerializer):
         elif hasattr(user, 'profil_enseignant'):
             return 'enseignant'
         return 'admin'
+        return 'admin'
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    """
-    Serializer complet pour la lecture du profil utilisateur
-    Inclut toutes les informations (lecture seule)
-    """
     roles = serializers.SerializerMethodField()
     profile_type = serializers.SerializerMethodField()
     matricule = serializers.SerializerMethodField()
     specialite = serializers.SerializerMethodField()
+    bureau = serializers.SerializerMethodField()  # Ajouté pour les enseignants
 
     class Meta:
         model = Utilisateur
         fields = [
             'id', 'email', 'first_name', 'last_name', 'telephone',
-            'date_inscription', 'roles', 'profile_type', 'matricule', 'specialite'
+            'date_inscription', 'roles', 'profile_type', 
+            'matricule', 'specialite', 'bureau'
         ]
-        read_only_fields = fields  # Tous les champs en lecture seule
+        read_only_fields = fields
 
     def get_roles(self, obj):
-        """Récupère la liste des noms de rôles"""
         return list(obj.roles.values_list('role__nom', flat=True))
 
     def get_profile_type(self, obj):
-        """Détermine le type de profil"""
         if hasattr(obj, 'profil_etudiant'):
             return 'etudiant'
         elif hasattr(obj, 'profil_enseignant'):
@@ -74,13 +71,17 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return 'admin'
 
     def get_matricule(self, obj):
-        """Récupère le matricule étudiant si existe"""
-        return getattr(obj.profil_etudiant, 'matricule', None)
+        """Retourne le matricule si l'utilisateur est un étudiant, sinon None"""
+        return obj.profil_etudiant.matricule if hasattr(obj, 'profil_etudiant') else None
 
     def get_specialite(self, obj):
-        """Récupère la spécialité enseignant si existe"""
-        return getattr(obj.profil_enseignant, 'specialite', None)
+        """Retourne la spécialité si l'utilisateur est un enseignant, sinon None"""
+        return obj.profil_enseignant.specialite if hasattr(obj, 'profil_enseignant') else None
 
+    def get_bureau(self, obj):
+        """Retourne le bureau si l'utilisateur est un enseignant, sinon None"""
+        return obj.profil_enseignant.bureau if hasattr(obj, 'profil_enseignant') else None
+    
 class UserUpdateSerializer(serializers.ModelSerializer):
     """
     Serializer pour la mise à jour des informations utilisateur
