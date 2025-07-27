@@ -1,3 +1,4 @@
+from django.db import models
 from django.db.models import Q
 from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import action

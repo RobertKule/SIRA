@@ -2,44 +2,63 @@
 
 {% block content %}
 <div class="space-y-8">
+    <!-- Navigation Rapide -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sticky top-4 z-10">
+        <h2 class="text-xl font-bold text-primary-light dark:text-primary-dark mb-4">Navigation Rapide</h2>
+        <div class="flex flex-wrap gap-3">
+            <a href="#authentification" class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Authentification</a>
+            <a href="#gestion-enseignants" class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-sm">Enseignants</a>
+            <a href="#gestion-etudiants" class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-sm">Étudiants</a>
+            <a href="#gestion-cours" class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-sm">Cours</a>
+            <a href="#facultes-departements" class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full text-sm">Facultés & Départements</a>
+            <a href="#promotions" class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 rounded-full text-sm">Promotions</a>
+            <a href="#annees-academiques" class="px-3 py-1 bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 rounded-full text-sm">Années Académiques</a>
+            <a href="#inscriptions" class="px-3 py-1 bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 rounded-full text-sm">Inscriptions</a>
+            <a href="#resultats" class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded-full text-sm">Résultats</a>
+            <a href="#notifications" class="px-3 py-1 bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 rounded-full text-sm">Notifications</a>
+            <a href="#messages" class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 rounded-full text-sm">Messages</a>
+        </div>
+    </div>
+
+    <!-- En-tête -->
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-        <h1 class="text-3xl font-bold text-primary-light dark:text-primary-dark mb-2">Documentation des Endpoints API</h1>
+        <h1 class="text-3xl font-bold text-primary-light dark:text-primary-dark mb-2">Documentation API SIRA</h1>
         <p class="text-gray-600 dark:text-gray-300">
-            Documentation complète des endpoints disponibles dans l'API SIRA avec exemples de requêtes et réponses.
+            Documentation complète des endpoints avec exemples pour les requêtes et réponses.
+            Toutes les dates doivent être au format ISO 8601 (YYYY-MM-DD).
         </p>
     </div>
 
-    <!-- Authentification -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-        <div class="bg-primary-light dark:bg-primary-dark px-6 py-4">
+    <!-- Section Authentification -->
+    <div id="authentification" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-blue-600 dark:bg-blue-800 px-6 py-4">
             <h2 class="text-xl font-semibold text-white">Authentification</h2>
-            <p class="text-primary-lighter dark:text-primary-lightest text-sm">
-                Gestion des tokens JWT et authentification des utilisateurs
+            <p class="text-blue-200 text-sm">
+                Gestion des connexions, profils et sécurité
             </p>
         </div>
         
         <div class="p-6 space-y-6">
-            <!-- Login Endpoint -->
+            <!-- Connexion -->
             <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
                 <div class="flex items-start justify-between">
                     <div>
                         <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
                             <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
-                            /api/auth/login/
+                            /api/login/
                         </h3>
                         <p class="text-gray-600 dark:text-gray-400 mt-1">
-                            Authentification JWT avec retour des tokens d'accès et de rafraîchissement
+                            Authentification JWT avec informations utilisateur
                         </p>
                     </div>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">PUBLIC</span>
                 </div>
 
                 <div class="mt-4">
                     <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
                         <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "email": "etudiant@example.com",
-    "password": "motdepasse123"
+  "email": "user@univ.edu",
+  "password": "motdepasse"
 }</code></pre>
                     </div>
                 </div>
@@ -48,83 +67,21 @@
                     <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Réponse (200 OK)</h4>
                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
                         <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "access": "eyJhbGciOiJIUz...",
-    "refresh": "eyJhbGciOiJIUz...",
-    "user": {
-        "id": 1,
-        "email": "etudiant@example.com",
-        "first_name": "Jean",
-        "last_name": "Dupont",
-        "roles": ["ETUDIANT"],
-        "profile_type": "etudiant",
-        "matricule": "ET2023001"
-    }
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Erreurs possibles</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-start">
-                            <span class="inline-block px-2 py-0.5 rounded bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs font-mono mr-2">400</span>
-                            <span class="text-gray-600 dark:text-gray-400">Email ou mot de passe invalide</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="inline-block px-2 py-0.5 rounded bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs font-mono mr-2">403</span>
-                            <span class="text-gray-600 dark:text-gray-400">Compte désactivé</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Refresh Token Endpoint -->
-            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
-                <div class="flex items-start justify-between">
-                    <div>
-                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
-                            <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
-                            /api/auth/refresh/
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 mt-1">
-                            Rafraîchir le token d'accès avec le token de rafraîchissement
-                        </p>
-                    </div>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">AUTHENTICATED</span>
-                </div>
-
-                <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
-                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "refresh": "eyJhbGciOiJIUz..."
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Réponse (200 OK)</h4>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
-                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "access": "eyJhbGciOiJIUz..."
+  "access": "eyJ0eXAiOiJKV1QiLCJhbGc...",
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGc...",
+  "user_id": 123,
+  "email": "user@univ.edu",
+  "first_name": "Jean",
+  "last_name": "Dupont",
+  "roles": ["ETUDIANT"],
+  "profile_type": "etudiant",
+  "telephone": "+243123456789"
 }</code></pre>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Profil Utilisateur -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-        <div class="bg-secondary-light dark:bg-secondary-dark px-6 py-4">
-            <h2 class="text-xl font-semibold text-white">Profil Utilisateur</h2>
-            <p class="text-secondary-lighter dark:text-secondary-lightest text-sm">
-            Gestion des informations personnelles et du mot de passe
-            </p>
-        </div>
-        
-        <div class="p-6 space-y-6">
-            <!-- Get Profile -->
+            <!-- Profil Utilisateur -->
             <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
                 <div class="flex items-start justify-between">
                     <div>
@@ -133,90 +90,23 @@
                             /api/me/
                         </h3>
                         <p class="text-gray-600 dark:text-gray-400 mt-1">
-                            Récupère toutes les informations du profil utilisateur
+                            Informations complètes du profil utilisateur connecté
                         </p>
                     </div>
                     <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">AUTHENTICATED</span>
                 </div>
-
-                <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Headers</h4>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-                        <code class="text-sm text-gray-800 dark:text-gray-200">Authorization: Bearer &lt;access_token&gt;</code>
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Réponse (200 OK)</h4>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
-                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "id": 1,
-    "email": "etudiant@example.com",
-    "first_name": "Jean",
-    "last_name": "Dupont",
-    "roles": ["ETUDIANT"],
-    "profile_type": "etudiant",
-    "matricule": "ET2023001",
-    "programme": "Informatique",
-    "promotion": 2023
-}</code></pre>
-                    </div>
-                </div>
             </div>
 
-            <!-- Update Profile -->
-            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
-                <div class="flex items-start justify-between">
-                    <div>
-                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
-                            <span class="inline-block px-2 py-1 rounded bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-sm font-mono mr-2">PATCH</span>
-                            /api/me/
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 mt-1">
-                            Met à jour partiellement les informations du profil
-                        </p>
-                    </div>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">AUTHENTICATED</span>
-                </div>
-
-                <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Champs modifiables</h4>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                        <li class="flex items-center">
-                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>
-                            <span class="text-gray-600 dark:text-gray-400">first_name</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>
-                            <span class="text-gray-600 dark:text-gray-400">last_name</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="inline-block w-2 h-2 rounded-full bg-red-500 mr-2"></span>
-                            <span class="text-gray-600 dark:text-gray-400">email (non modifiable)</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Exemple de requête</h4>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
-                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "first_name": "NouveauPrénom"
-}</code></pre>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Change Password -->
+            <!-- Changer Mot de Passe -->
             <div>
                 <div class="flex items-start justify-between">
                     <div>
                         <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
-                            <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
-                            /api/me/change-password/
+                            <span class="inline-block px-2 py-1 rounded bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-sm font-mono mr-2">POST</span>
+                            /api/me/password/
                         </h3>
                         <p class="text-gray-600 dark:text-gray-400 mt-1">
-                            Modifier le mot de passe de l'utilisateur
+                            Modification sécurisée du mot de passe
                         </p>
                     </div>
                     <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">AUTHENTICATED</span>
@@ -226,69 +116,51 @@
                     <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
                         <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "old_password": "ancienmotdepasse",
-    "new_password": "nouveaumotdepasse"
+  "old_password": "ancien_motdepasse",
+  "new_password": "nouveau_motdepasse"
 }</code></pre>
                     </div>
-                </div>
-
-                <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Validation</h4>
-                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                        <li class="flex items-start">
-                            <svg class="h-4 w-4 mt-0.5 mr-2 flex-shrink-0 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                            </svg>
-                            Le nouveau mot de passe doit être différent de l'ancien
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-4 w-4 mt-0.5 mr-2 flex-shrink-0 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                            </svg>
-                            Doit respecter les règles de complexité (min 8 caractères, etc.)
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Administration -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-        <div class="bg-purple-600 dark:bg-purple-800 px-6 py-4">
-            <h2 class="text-xl font-semibold text-white">Administration</h2>
-            <p class="text-purple-200 text-sm">
-                Endpoints réservés aux administrateurs pour la gestion des comptes
+    <!-- Section Enseignants -->
+    <div id="gestion-enseignants" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-green-600 dark:bg-green-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Gestion des Enseignants</h2>
+            <p class="text-green-200 text-sm">
+                Création et gestion des profils enseignants
             </p>
         </div>
         
         <div class="p-6 space-y-6">
-            <!-- Create Student -->
+            <!-- Création Enseignant -->
             <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
                 <div class="flex items-start justify-between">
                     <div>
                         <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
                             <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
-                            /api/admin/etudiants/
+                            /api/admin/create-enseignant/
                         </h3>
                         <p class="text-gray-600 dark:text-gray-400 mt-1">
-                            Crée un nouveau compte étudiant avec profil associé
+                            Crée un nouveau compte enseignant (Admin uniquement)
                         </p>
                     </div>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">ADMIN ONLY</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">ADMIN</span>
                 </div>
 
                 <div class="mt-4">
                     <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
                         <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "email": "nouvel.etudiant@example.com",
-    "first_name": "Pierre",
-    "last_name": "Martin",
-    "password": "motdepasse123",
-    "matricule": "ET2023002",
-    "programme": "Informatique",
-    "promotion": 2023
+  "email": "enseignant@univ.edu",
+  "password": "motdepasse",
+  "first_name": "Jean",
+  "last_name": "Dupont",
+  "specialite": "Informatique",
+  "bureau": "B205",
+  "est_responsable": false
 }</code></pre>
                     </div>
                 </div>
@@ -297,52 +169,509 @@
                     <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Réponse (201 Created)</h4>
                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
                         <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
-    "id": 2,
-    "email": "nouvel.etudiant@example.com",
-    "first_name": "Pierre",
-    "last_name": "Martin",
-    "roles": ["ETUDIANT"],
-    "profile_type": "etudiant",
-    "matricule": "ET2023002"
+  "utilisateur_id": 123,
+  "email": "enseignant@univ.edu",
+  "nom": "Dupont",
+  "prenom": "Jean",
+  "specialite": "Informatique",
+  "bureau": "B205",
+  "est_responsable": false
 }</code></pre>
                     </div>
                 </div>
             </div>
 
-            <!-- Create Teacher -->
+            <!-- Liste Enseignants -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
+                            <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                            /gestion/enseignants/
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            Liste tous les enseignants avec pagination et filtres
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">AUTHENTICATED</span>
+                </div>
+
+                <div class="mt-4">
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Paramètres</h4>
+                    <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                        <li><code>?search=</code> - Recherche par nom/prénom/spécialité</li>
+                        <li><code>?est_responsable=true</code> - Filtre par statut responsable</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cours d'un Enseignant -->
+            <div>
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
+                            <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                            /gestion/enseignants/{id}/cours/
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            Liste tous les cours annuels d'un enseignant
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">AUTHENTICATED</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Étudiants -->
+    <div id="gestion-etudiants" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-purple-600 dark:bg-purple-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Gestion des Étudiants</h2>
+            <p class="text-purple-200 text-sm">
+                Création et gestion des profils étudiants
+            </p>
+        </div>
+        
+        <div class="p-6 space-y-6">
+            <!-- Création Étudiant -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
+                            <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
+                            /api/admin/create-etudiant/
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            Crée un nouveau compte étudiant (Admin uniquement)
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">ADMIN</span>
+                </div>
+
+                <div class="mt-4">
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
+                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
+  "email": "etudiant@univ.edu",
+  "password": "motdepasse",
+  "first_name": "Sophie",
+  "last_name": "Martin",
+  "matricule": "MAT2023001",
+  "date_naissance": "2000-01-01",
+  "lieu_naissance": "Paris",
+  "genre": "F"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liste Étudiants -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
+                            <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                            /gestion/etudiants/
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            Liste tous les étudiants avec recherche et filtres
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">AUTHENTICATED</span>
+                </div>
+
+                <div class="mt-4">
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Paramètres</h4>
+                    <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                        <li><code>?search=</code> - Recherche par matricule/nom/prénom</li>
+                        <li><code>?genre=M</code> - Filtre par genre (M/F)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Inscription Étudiant -->
             <div>
                 <div class="flex items-start justify-between">
                     <div>
                         <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
                             <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
-                            /api/admin/enseignants/
+                            /gestion/inscriptions/
                         </h3>
                         <p class="text-gray-600 dark:text-gray-400 mt-1">
-                            Crée un nouveau compte enseignant avec profil associé
+                            Inscrit un étudiant à une promotion annuelle
                         </p>
                     </div>
-                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">ADMIN ONLY</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">ADMIN</span>
                 </div>
 
                 <div class="mt-4">
-                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Champs spécifiques</h4>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                        <li class="flex items-center">
-                            <span class="inline-block w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
-                            <span class="text-gray-600 dark:text-gray-400">matricule_enseignant</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="inline-block w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
-                            <span class="text-gray-600 dark:text-gray-400">departement</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="inline-block w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
-                            <span class="text-gray-600 dark:text-gray-400">specialite</span>
-                        </li>
-                    </ul>
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
+                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
+  "etudiant_id": 123,
+  "promotion_annuelle_id": 1,
+  "statut": "ACTIF"
+}</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Section Cours -->
+    <div id="gestion-cours" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-yellow-600 dark:bg-yellow-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Gestion des Cours</h2>
+            <p class="text-yellow-200 text-sm">
+                Création et affectation des cours
+            </p>
+        </div>
+        
+        <div class="p-6 space-y-6">
+            <!-- Création Cours -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
+                            <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
+                            /gestion/cours/
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            Crée un nouveau cours
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">ADMIN</span>
+                </div>
+
+                <div class="mt-4">
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
+                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
+  "code": "INF101",
+  "intitule": "Introduction à l'informatique",
+  "credit": 3,
+  "description": "Cours d'introduction aux concepts de base..."
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cours Annuel -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
+                            <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
+                            /gestion/cours-annuels/
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            Programme un cours pour l'année académique
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">ADMIN</span>
+                </div>
+
+                <div class="mt-4">
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
+                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
+  "cours_id": 1,
+  "annee_id": 1,
+  "semestre": 1,
+  "enseignant_id": 123
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Affectation Enseignant -->
+            <div>
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200">
+                            <span class="inline-block px-2 py-1 rounded bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-sm font-mono mr-2">PATCH</span>
+                            /gestion/cours-annuels/{id}/
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            Affecte ou modifie l'enseignant d'un cours
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">ADMIN</span>
+                </div>
+
+                <div class="mt-4">
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
+                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
+  "enseignant_id": 123
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Facultés & Départements -->
+    <div id="facultes-departements" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-red-600 dark:bg-red-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Facultés & Départements</h2>
+            <p class="text-red-200 text-sm">
+                Structure organisationnelle de l'université
+            </p>
+        </div>
+        
+        <div class="p-6 space-y-6">
+            <!-- Facultés -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">GET</span>
+                    /gestion/facultes/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-2">Liste toutes les facultés</p>
+                <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                    <li><code>?search=</code> - Recherche par nom/sigle</li>
+                </ul>
+            </div>
+
+            <!-- Départements par Faculté -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                    /gestion/facultes/{id}/departements/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400">Liste tous les départements d'une faculté</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Promotions -->
+    <div id="promotions" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-indigo-600 dark:bg-indigo-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Promotions</h2>
+            <p class="text-indigo-200 text-sm">
+                Gestion des promotions et classes
+            </p>
+        </div>
+        
+        <div class="p-6 space-y-6">
+            <!-- Promotions -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">GET</span>
+                    /gestion/promotions/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-2">Liste toutes les promotions</p>
+                <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                    <li><code>?departement=1</code> - Filtre par département</li>
+                    <li><code>?niveau=L1</code> - Filtre par niveau</li>
+                </ul>
+            </div>
+
+            <!-- Promotions Annuelles -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                    /gestion/promotions-annuelles/{id}/inscriptions/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400">Liste les étudiants inscrits dans une promotion</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Années Académiques -->
+    <div id="annees-academiques" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-pink-600 dark:bg-pink-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Années Académiques</h2>
+            <p class="text-pink-200 text-sm">
+                Gestion des années universitaires
+            </p>
+        </div>
+        
+        <div class="p-6">
+            <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                /gestion/annees-academiques/active/
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">Récupère l'année académique active</p>
+        </div>
+    </div>
+
+    <!-- Section Inscriptions -->
+    <div id="inscriptions" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-teal-600 dark:bg-teal-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Inscriptions</h2>
+            <p class="text-teal-200 text-sm">
+                Gestion des inscriptions des étudiants
+            </p>
+        </div>
+        
+        <div class="p-6">
+            <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                <span class="inline-block px-2 py-1 rounded bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-sm font-mono mr-2">POST</span>
+                /gestion/inscriptions/{id}/desinscrire/
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">Désinscrit un étudiant (statut = DESINSCRIT)</p>
+        </div>
+    </div>
+
+    <!-- Section Résultats -->
+    <div id="resultats" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-orange-600 dark:bg-orange-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Résultats</h2>
+            <p class="text-orange-200 text-sm">
+                Gestion des notes et bulletins
+            </p>
+        </div>
+        
+        <div class="p-6 space-y-6">
+            <!-- Création Résultat -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
+                    /gestion/resultats/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-2">Enregistre les notes d'un étudiant</p>
+                
+                <div class="mt-4">
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
+                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
+  "etudiant_id": 123,
+  "cours_annuel_id": 1,
+  "note_tp": 15.5,
+  "note_interro": 14.0,
+  "note_examen": 16.0,
+  "session": "NORMAL"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulletin -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                    /gestion/resultats/bulletin/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-2">Génère le bulletin d'un étudiant</p>
+                <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                    <li><code>?etudiant=123</code> - ID de l'étudiant (requis)</li>
+                    <li><code>?annee=1</code> - ID de l'année académique (requis)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Notifications -->
+    <div id="notifications" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-cyan-600 dark:bg-cyan-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Notifications</h2>
+            <p class="text-cyan-200 text-sm">
+                Système de notification en temps réel
+            </p>
+        </div>
+        
+        <div class="p-6 space-y-6">
+            <!-- Liste Notifications -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                    /communication/notifications/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400">Notifications de l'utilisateur connecté</p>
+            </div>
+
+            <!-- Notifications non lues -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                    /communication/notifications/non-lues/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400">Notifications non lues de l'utilisateur</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Messages -->
+    <div id="messages" class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="bg-emerald-600 dark:bg-emerald-800 px-6 py-4">
+            <h2 class="text-xl font-semibold text-white">Messages & Groupes</h2>
+            <p class="text-emerald-200 text-sm">
+                Messagerie privée et groupes de discussion
+            </p>
+        </div>
+        
+        <div class="p-6 space-y-6">
+            <!-- Messages privés -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-sm font-mono mr-2">POST</span>
+                    /communication/messages/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-2">Envoie un message privé</p>
+                
+                <div class="mt-4">
+                    <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Requête</h4>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md">
+                        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{
+  "destinataire_id": 456,
+  "contenu": "Bonjour, j'ai une question concernant le cours..."
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Groupes de discussion -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">
+                    <span class="inline-block px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-mono mr-2">GET</span>
+                    /communication/groupes/
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400">Liste les groupes de discussion de l'utilisateur</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Codes de Statut -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-bold text-primary-light dark:text-primary-dark mb-4">Codes de Statut</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+                <h3 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Succès</h3>
+                <ul class="space-y-1 text-gray-600 dark:text-gray-400">
+                    <li><code>200 OK</code> - Requête réussie</li>
+                    <li><code>201 Created</code> - Ressource créée</li>
+                    <li><code>204 No Content</code> - Suppression réussie</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Erreurs</h3>
+                <ul class="space-y-1 text-gray-600 dark:text-gray-400">
+                    <li><code>400 Bad Request</code> - Données invalides</li>
+                    <li><code>401 Unauthorized</code> - Authentification requise</li>
+                    <li><code>403 Forbidden</code> - Permissions insuffisantes</li>
+                    <li><code>404 Not Found</code> - Ressource introuvable</li>
+                    <li><code>422 Unprocessable Entity</code> - Validation échouée</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+// Smooth scroll pour les ancres
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Mise en évidence syntaxique pour les blocs de code
+document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightBlock(block);
+});
+</script>
 {% endblock %}

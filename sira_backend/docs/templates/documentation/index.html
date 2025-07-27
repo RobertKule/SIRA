@@ -1,255 +1,412 @@
 {% extends "documentation/base.html" %}
-
 {% block content %}
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- En-tête avec description complète -->
-    <div class="text-center mb-12">
-        <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
-            Documentation Technique <span class="text-primary-light dark:text-primary-dark">SIRA</span>
-        </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Système Informatique de Résultats Académiques - Plateforme complète de gestion des parcours éducatifs
-        </p>
-    </div>
-
-    <!-- Section Aperçu du projet -->
-    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden mb-12">
-        <div class="p-8">
-            <div class="flex items-center mb-6">
-                <div class="p-3 rounded-full bg-primary-light dark:bg-primary-dark bg-opacity-10">
-                    <svg class="h-8 w-8 text-primary-light dark:text-primary-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                </div>
-                <h2 class="ml-4 text-2xl font-bold text-gray-900 dark:text-white">Aperçu du Projet SIRA</h2>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- En-tête animée -->
+    <div class="text-center mb-16">
+        <div class="relative">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
             </div>
-            
-            <div class="prose dark:prose-dark max-w-none">
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    Le <strong>Système Informatique de Résultats Académiques (SIRA)</strong> est une plateforme moderne conçue pour digitaliser et optimiser la gestion des données éducatives au sein des établissements universitaires.
+            <div class="relative">
+                <h1 class="text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                        SIRA
+                    </span>
+                    <span class="block text-3xl mt-2 text-gray-700 dark:text-gray-300">
+                        Documentation Technique
+                    </span>
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                    Système Informatique de Résultats Académiques
+                    <br>
+                    <span class="text-lg text-gray-500 dark:text-gray-500">
+                        Plateforme de gestion universitaire moderne et scalable
+                    </span>
                 </p>
-                
-                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mt-6 mb-3">Fonctionnalités Principales</h3>
-                <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                    <li class="flex items-start">
-                        <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>Gestion centralisée des <strong>étudiants</strong>, <strong>enseignants</strong> et <strong>administrateurs</strong></span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>Suivi des <strong>notes</strong> et <strong>résultats académiques</strong> en temps réel</span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>Gestion des <strong>promotions</strong>, <strong>cours</strong> et <strong>emplois du temps</strong></span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>Communication interne entre les différents acteurs</span>
-                    </li>
-                </ul>
-
-                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mt-6 mb-3">Rôles dans le Système</h3>
-                <div class="grid md:grid-cols-3 gap-6 mt-4">
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                        <h4 class="font-medium text-primary-light dark:text-primary-dark mb-2">Étudiants</h4>
-                        <p class="text-sm text-gray-600 dark:text-gray-300">
-                            Consultation des notes, emploi du temps et communication avec les enseignants
-                        </p>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                        <h4 class="font-medium text-primary-light dark:text-primary-dark mb-2">Enseignants</h4>
-                        <p class="text-sm text-gray-600 dark:text-gray-300">
-                            Saisie des notes, gestion des cours et communication avec les étudiants
-                        </p>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                        <h4 class="font-medium text-primary-light dark:text-primary-dark mb-2">Administrateurs</h4>
-                        <p class="text-sm text-gray-600 dark:text-gray-300">
-                            Gestion complète du système, des utilisateurs et des données académiques
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Section Stack Technique -->
-    <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+    <!-- Carte de présentation interactive -->
+    <!-- Grille principale avec auto-fit pour un nombre variable de colonnes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+
+        <!-- Carte principale SIRA -->
+        <div class="lg:col-span-2 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div class="p-8 flex-grow">
+                <div class="flex items-center mb-6">
+                    <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600">
+                        <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <h2 class="ml-4 text-3xl font-bold text-gray-900 dark:text-white">
+                        Qu'est-ce que SIRA ?
+                    </h2>
+                </div>
+                <div class="prose dark:prose-dark max-w-none">
+                    <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                        <strong>SIRA</strong> est une solution complète de digitalisation des processus académiques,
+                        conçue pour répondre aux besoins spécifiques des établissements d'enseignement supérieur congolais.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-8">
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 flex items-center">
+                                <svg class="h-6 w-6 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                Objectifs
+                            </h3>
+                            <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Automatisation des processus administratifs</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Amélioration de la transparence académique</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Réduction des erreurs de saisie</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 flex items-center">
+                                <svg class="h-6 w-6 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                                Sécurité
+                            </h3>
+                            <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Authentification multi-facteurs</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Chiffrement des données sensibles</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Audit trail complet</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- Statistiques - Placé à l'extérieur de la carte principale pour qu'elle prenne une colonne entière sur lg -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mx-6 mb-6 lg:mx-6 lg:mb-6">
+                <h3 class="text-xl font-bold text-center text-gray-900 dark:text-white mb-4">Impact SIRA</h3>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">85%</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Réduction temps admin</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">99.9%</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Disponibilité</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-green-600 dark:text-green-400">1000+</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Utilisateurs actifs</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-orange-600 dark:text-orange-400">24/7</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stack Technique Modernisé - Backend -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl overflow-hidden">
             <div class="p-8">
                 <div class="flex items-center mb-6">
-                    <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
-                        <svg class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="p-3 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600">
+                        <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <h2 class="ml-4 text-2xl font-bold text-gray-900 dark:text-white">Stack Technique</h2>
+                    <h2 class="ml-4 text-2xl font-bold text-gray-900 dark:text-white">Stack Backend</h2>
                 </div>
-                
                 <div class="space-y-6">
-                    <div>
-                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">Backend</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">Django 4.2</span>
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">DRF</span>
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">Python 3.10</span>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                            <div class="text-3xl mb-2">🐍</div>
+                            <div class="font-medium">Django 4.2</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Framework principal</div>
+                        </div>
+                        <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                            <div class="text-3xl mb-2">🔗</div>
+                            <div class="font-medium">DRF 3.14</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">REST API</div>
                         </div>
                     </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">Base de Données</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">PostgreSQL</span>
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">Redis (cache)</span>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">Authentification</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">JWT</span>
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">OAuth2</span>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">Infrastructure</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">Docker</span>
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">AWS/GCP</span>
-                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium">CI/CD</span>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
+                        <h3 class="font-medium mb-3">Composants Clés</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                <span class="text-sm">Django ORM avec PostgreSQL</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                <span class="text-sm">DRF ViewSets & Serializers</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                <span class="text-sm">Celery pour tâches asynchrones</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                <span class="text-sm">Redis pour cache & sessions</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Section Points d'Entrée -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+         <!-- Infrastructure -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl overflow-hidden">
             <div class="p-8">
                 <div class="flex items-center mb-6">
-                    <div class="p-3 rounded-full bg-green-100 dark:bg-green-900">
-                        <svg class="h-8 w-8 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    <div class="p-3 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600">
+                        <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                         </svg>
                     </div>
-                    <h2 class="ml-4 text-2xl font-bold text-gray-900 dark:text-white">Points d'Entrée</h2>
+                    <h2 class="ml-4 text-2xl font-bold text-gray-900 dark:text-white">Infrastructure</h2>
                 </div>
-                
                 <div class="space-y-4">
-                    <p class="text-gray-700 dark:text-gray-300">
-                        Accédez aux différentes sections de la documentation technique pour comprendre comment intégrer SIRA :
+                    <div class="flex items-center p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                        <div class="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                            <svg class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <div class="font-medium">PostgreSQL 14</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Base de données principale</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                        <div class="p-2 bg-red-100 dark:bg-red-900 rounded-lg">
+                            <svg class="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <div class="font-medium">Redis</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Cache & sessions</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                        <div class="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                            <svg class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <div class="font-medium">Docker</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Containerisation</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                        <div class="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                            <svg class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <div class="font-medium">GitHub Actions</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">CI/CD Pipeline</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Points d'entrée modernisés -->
+        <div class="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl overflow-hidden">
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        Commencez avec SIRA
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Accédez aux ressources nécessaires pour intégrer et utiliser SIRA
                     </p>
-                    
-                    <a href="{% url 'api-routes' %}" class="group flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
-                        <div>
-                            <h3 class="font-medium text-gray-900 dark:text-white group-hover:text-primary-light dark:group-hover:text-primary-dark">Documentation API</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Tous les endpoints disponibles</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <a href="{% url 'api-routes' %}" class="group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-gray-900 dark:text-white mb-2">Documentation API</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                Endpoints complets, exemples de requêtes et réponses
+                            </p>
+                            <div class="text-blue-600 dark:text-blue-400 font-medium text-sm group-hover:translate-x-1 transition-transform">
+                                Explorer l'API →
+                            </div>
                         </div>
-                        <svg class="h-5 w-5 text-gray-400 group-hover:text-primary-light dark:group-hover:text-primary-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
                     </a>
-                    
-                    <a href="{% url 'models-doc' %}" class="group flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
-                        <div>
-                            <h3 class="font-medium text-gray-900 dark:text-white group-hover:text-primary-light dark:group-hover:text-primary-dark">Modèles de Données</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Structure complète de la base de données</p>
+                    <a href="{% url 'models-doc' %}" class="group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-gray-900 dark:text-white mb-2">Modèles de Données</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                Structure complète de la base de données et relations
+                            </p>
+                            <div class="text-green-600 dark:text-green-400 font-medium text-sm group-hover:translate-x-1 transition-transform">
+                                Voir les modèles →
+                            </div>
                         </div>
-                        <svg class="h-5 w-5 text-gray-400 group-hover:text-primary-light dark:group-hover:text-primary-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
                     </a>
-                    
-                    <a href="{% url 'frontend-guidelines' %}" class="group flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
-                        <div>
-                            <h3 class="font-medium text-gray-900 dark:text-white group-hover:text-primary-light dark:group-hover:text-primary-dark">Guide Frontend</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Intégration avec React/Vue/Angular</p>
+                    <a href="{% url 'frontend-guidelines' %}" class="group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-gray-900 dark:text-white mb-2">Guide Frontend</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                Intégration React/Vue/Angular avec SIRA
+                            </p>
+                            <div class="text-purple-600 dark:text-purple-400 font-medium text-sm group-hover:translate-x-1 transition-transform">
+                                Commencer →
+                            </div>
                         </div>
-                        <svg class="h-5 w-5 text-gray-400 group-hover:text-primary-light dark:group-hover:text-primary-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture visuelle -->
+        <div class="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl overflow-hidden">
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        Architecture SIRA
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Vue d'ensemble des composants et flux de données
+                    </p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Diagramme architectural -->
+                    <div>
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+                            <h3 class="font-semibold text-lg mb-4 text-center">Flux de Données</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="font-medium">Client (Web/Mobile)</div>
+                                        <div class="text-sm text-gray-600 dark:text-gray-400">Interface utilisateur</div>
+                                    </div>
+                                </div>
+                                <div class="border-l-2 border-blue-300 ml-5 h-8"></div>
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="font-medium">API Gateway</div>
+                                        <div class="text-sm text-gray-600 dark:text-gray-400">Authentification & routing</div>
+                                    </div>
+                                </div>
+                                <div class="border-l-2 border-green-300 ml-5 h-8"></div>
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="font-medium">Services</div>
+                                        <div class="text-sm text-gray-600 dark:text-gray-400">Logique métier</div>
+                                    </div>
+                                </div>
+                                <div class="border-l-2 border-purple-300 ml-5 h-8"></div>
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">4</div>
+                                    <div class="ml-4 flex-1">
+                                        <div class="font-medium">Base de Données</div>
+                                        <div class="text-sm text-gray-600 dark:text-gray-400">Stockage persistant</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Composants -->
+                    <div>
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+                            <h3 class="font-semibold text-lg mb-4 text-center">Modules Principaux</h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                                    <div class="font-medium text-blue-700 dark:text-blue-300">Authentification</div>
+                                    <div class="text-sm text-blue-600 dark:text-blue-400">JWT, rôles et permissions</div>
+                                </div>
+                                <div class="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                                    <div class="font-medium text-green-700 dark:text-green-300">Gestion Académique</div>
+                                    <div class="text-sm text-green-600 dark:text-green-400">Étudiants, enseignants, cours</div>
+                                </div>
+                                <div class="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                                    <div class="font-medium text-purple-700 dark:text-purple-300">Communication</div>
+                                    <div class="text-sm text-purple-600 dark:text-purple-400">Notifications et messages</div>
+                                </div>
+                                <div class="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                                    <div class="font-medium text-orange-700 dark:text-orange-300">Reporting</div>
+                                    <div class="text-sm text-orange-600 dark:text-orange-400">Statistiques et export</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Section Architecture -->
-    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden mb-12">
-        <div class="p-8">
-            <div class="flex items-center mb-6">
-                <div class="p-3 rounded-full bg-purple-100 dark:bg-purple-900">
-                    <svg class="h-8 w-8 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                    </svg>
-                </div>
-                <h2 class="ml-4 text-2xl font-bold text-gray-900 dark:text-white">Architecture du Système</h2>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3">Diagramme de Composants</h3>
-                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 flex items-center justify-center">
-                        <img src="
-                        {% comment %} {% static 'images/architecture-diagram.png' %} {% endcomment %}
-                         " alt="Architecture SIRA" class="max-w-full h-auto rounded">
-                    </div>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 text-center">
-                        Vue d'ensemble des différents modules et leurs interactions
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3">Flux de Données</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-light dark:bg-primary-dark bg-opacity-10 flex items-center justify-center mt-0.5">
-                                <span class="text-primary-light dark:text-primary-dark font-bold">1</span>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-medium text-gray-800 dark:text-gray-200">Authentification</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">
-                                    JWT tokens avec refresh mechanism
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-light dark:bg-primary-dark bg-opacity-10 flex items-center justify-center mt-0.5">
-                                <span class="text-primary-light dark:text-primary-dark font-bold">2</span>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-medium text-gray-800 dark:text-gray-200">Couche API</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">
-                                    RESTful endpoints avec permissions par rôle
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-light dark:bg-primary-dark bg-opacity-10 flex items-center justify-center mt-0.5">
-                                <span class="text-primary-light dark:text-primary-dark font-bold">3</span>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-medium text-gray-800 dark:text-gray-200">Services</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">
-                                    Calcul des moyennes, génération de rapports
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Footer avec informations -->
+    <div class="text-center mt-16">
+        <div class="inline-flex flex-wrap justify-center items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="flex items-center my-1">
+                <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                </svg>
+                Version 1.0.0
+            </span>
+            <span class="flex items-center my-1">
+                <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Compatible RDC
+            </span>
+            <span class="flex items-center my-1">
+                <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Support 24/7
+            </span>
         </div>
     </div>
 </div>
