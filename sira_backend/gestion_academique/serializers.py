@@ -5,8 +5,6 @@ from .models import (
 )
 from authentification.models import Utilisateur
 
-# ==== Sérialiseurs de base ====
-
 class FaculteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Faculte
@@ -28,46 +26,101 @@ class AnneeAcademiqueSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnneeAcademique
         fields = '__all__'
-        
+        extra_kwargs = {
+            'date_debut': {'required': True},
+            'date_fin': {'required': True}
+        }
+
     def validate(self, data):
         if data['date_debut'] > data['date_fin']:
             raise serializers.ValidationError("La date de fin doit être postérieure à la date de début")
         return data
-
-# ==== Sérialiseurs pour les utilisateurs spécialisés ====
-
-class EtudiantSerializer(serializers.ModelSerializer):
-    utilisateur_id = serializers.PrimaryKeyRelatedField(
-        queryset=Utilisateur.objects.all(),
-        source='utilisateur',
-        write_only=True
-    )
-    nom = serializers.CharField(source='utilisateur.last_name', read_only=True)
-    prenom = serializers.CharField(source='utilisateur.first_name', read_only=True)
-    email = serializers.EmailField(source='utilisateur.email', read_only=True)
-
-    class Meta:
-        model = Etudiant
-        fields = '__all__'
-        extra_fields = ['nom', 'prenom', 'email']
-
 class EnseignantSerializer(serializers.ModelSerializer):
-    utilisateur_id = serializers.PrimaryKeyRelatedField(
-        queryset=Utilisateur.objects.all(),
-        source='utilisateur',
-        write_only=True
-    )
-    nom = serializers.CharField(source='utilisateur.last_name', read_only=True)
-    prenom = serializers.CharField(source='utilisateur.first_name', read_only=True)
-    email = serializers.EmailField(source='utilisateur.email', read_only=True)
+    # Champs utilisateur intégrés directement
+    email = serializers.EmailField(source='utilisateur.email', required=True)
+    password = serializers.CharField(source='utilisateur.password', write_only=True, required=False)
+    nom = serializers.CharField(source='utilisateur.last_name', required=True)
+    prenom = serializers.CharField(source='utilisateur.first_name', required=True)
+    telephone = serializers.CharField(source='utilisateur.telephone', required=False)
 
     class Meta:
         model = Enseignant
-        fields = '__all__'
-        extra_fields = ['nom', 'prenom', 'email']
+        fields = [
+            'utilisateur_id',  # Utilisez le nom du champ PK
+            'email', 
+            'password', 
+            'nom', 
+            'prenom', 
+            'telephone',
+            'specialite', 
+            'bureau', 
+            'est_responsable'
+        ]
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'utilisateur_id': {'read_only': True}  # Auto-généré
+        }
 
-# ==== Sérialiseurs pour la structure académique ====
+    def create(self, validated_data):
+        user_data = validated_data.pop('utilisateur')
+        
+        user = Utilisateur.objects.create_user(
+            email=user_data['email'],
+            password=user_data.get('password', 'defaultpassword'),
+            first_name=user_data['first_name'],
+            last_name=user_data['last_name'],
+            telephone=user_data.get('telephone', '')
+        )
+        
+        enseignant = Enseignant.objects.create(
+            utilisateur=user,
+            **validated_data
+        )
+        return enseignant
+    
+class EtudiantSerializer(serializers.ModelSerializer):
+    # Champs utilisateur intégrés
+    email = serializers.EmailField(source='utilisateur.email', required=True)
+    password = serializers.CharField(source='utilisateur.password', write_only=True, required=False)
+    nom = serializers.CharField(source='utilisateur.last_name', required=True)
+    prenom = serializers.CharField(source='utilisateur.first_name', required=True)
+    telephone = serializers.CharField(source='utilisateur.telephone', required=False)
 
+    class Meta:
+        model = Etudiant
+        fields = [
+            'utilisateur_id',  # Nom correct du champ PK
+            'email', 
+            'password', 
+            'nom', 
+            'prenom', 
+            'telephone',
+            'matricule', 
+            'date_naissance', 
+            'lieu_naissance', 
+            'genre'
+        ]
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'utilisateur_id': {'read_only': True}
+        }
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('utilisateur')
+        
+        user = Utilisateur.objects.create_user(
+            email=user_data['email'],
+            password=user_data.get('password', 'defaultpassword'),
+            first_name=user_data['first_name'],
+            last_name=user_data['last_name'],
+            telephone=user_data.get('telephone', '')
+        )
+        
+        etudiant = Etudiant.objects.create(
+            utilisateur=user,
+            **validated_data
+        )
+        return etudiant  
 class PromotionSerializer(serializers.ModelSerializer):
     departement = DepartementSerializer(read_only=True)
     departement_id = serializers.PrimaryKeyRelatedField(
@@ -87,14 +140,12 @@ class PromotionAnnuelleSerializer(serializers.ModelSerializer):
         source='promotion',
         write_only=True
     )
-    
     annee = AnneeAcademiqueSerializer(read_only=True)
     annee_id = serializers.PrimaryKeyRelatedField(
         queryset=AnneeAcademique.objects.all(),
         source='annee',
         write_only=True
     )
-    
     responsable = EnseignantSerializer(read_only=True)
     responsable_id = serializers.PrimaryKeyRelatedField(
         queryset=Enseignant.objects.all(),
@@ -106,8 +157,6 @@ class PromotionAnnuelleSerializer(serializers.ModelSerializer):
     class Meta:
         model = PromotionAnnuelle
         fields = '__all__'
-
-# ==== Sérialiseurs pour les cours ====
 
 class CoursSerializer(serializers.ModelSerializer):
     class Meta:
@@ -121,14 +170,12 @@ class CoursAnnuelSerializer(serializers.ModelSerializer):
         source='cours',
         write_only=True
     )
-    
     annee = AnneeAcademiqueSerializer(read_only=True)
     annee_id = serializers.PrimaryKeyRelatedField(
         queryset=AnneeAcademique.objects.all(),
         source='annee',
         write_only=True
     )
-    
     enseignant = EnseignantSerializer(read_only=True)
     enseignant_id = serializers.PrimaryKeyRelatedField(
         queryset=Enseignant.objects.all(),
@@ -141,8 +188,6 @@ class CoursAnnuelSerializer(serializers.ModelSerializer):
         model = CoursAnnuel
         fields = '__all__'
 
-# ==== Sérialiseurs pour les inscriptions et résultats ====
-
 class InscriptionSerializer(serializers.ModelSerializer):
     etudiant = EtudiantSerializer(read_only=True)
     etudiant_id = serializers.PrimaryKeyRelatedField(
@@ -150,7 +195,6 @@ class InscriptionSerializer(serializers.ModelSerializer):
         source='etudiant',
         write_only=True
     )
-    
     promotion_annuelle = PromotionAnnuelleSerializer(read_only=True)
     promotion_annuelle_id = serializers.PrimaryKeyRelatedField(
         queryset=PromotionAnnuelle.objects.all(),
@@ -169,7 +213,6 @@ class ResultatSerializer(serializers.ModelSerializer):
         source='etudiant',
         write_only=True
     )
-    
     cours_annuel = CoursAnnuelSerializer(read_only=True)
     cours_annuel_id = serializers.PrimaryKeyRelatedField(
         queryset=CoursAnnuel.objects.all(),
@@ -182,28 +225,23 @@ class ResultatSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
     def validate(self, data):
-        # Validation des notes entre 0 et 20
         for field in ['note_tp', 'note_interro', 'note_examen']:
             if field in data and data[field] is not None:
-                if not (0 <= data[field] <= 20):
+                if not (0 <= float(data[field]) <= 20):
                     raise serializers.ValidationError(
                         {field: "La note doit être comprise entre 0 et 20"}
                     )
         return data
         
     def calculate_moyenne(self, validated_data):
-        # Exemple de calcul de moyenne (à adapter selon votre logique métier)
         notes = []
-        if validated_data.get('note_tp'):
-            notes.append(validated_data['note_tp'] * 0.3)  # 30% du TP
-        if validated_data.get('note_interro'):
-            notes.append(validated_data['note_interro'] * 0.2)  # 20% de l'interro
-        if validated_data.get('note_examen'):
-            notes.append(validated_data['note_examen'] * 0.5)  # 50% de l'examen
-            
-        if notes:
-            return sum(notes)
-        return None
+        weights = {'note_tp': 0.3, 'note_interro': 0.2, 'note_examen': 0.5}
+        
+        for field, weight in weights.items():
+            if validated_data.get(field):
+                notes.append(float(validated_data[field]) * weight)
+                
+        return sum(notes) if notes else None
 
     def create(self, validated_data):
         validated_data['moyenne'] = self.calculate_moyenne(validated_data)

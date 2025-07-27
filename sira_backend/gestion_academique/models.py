@@ -24,8 +24,6 @@ class Enseignant(models.Model):
     bureau = models.CharField(max_length=50)
     est_responsable = models.BooleanField(default=False)
     
-# Dans gestion_academique/models.py
-
 class Faculte(models.Model):
     nom = models.CharField(max_length=100)
     sigle = models.CharField(max_length=10)
