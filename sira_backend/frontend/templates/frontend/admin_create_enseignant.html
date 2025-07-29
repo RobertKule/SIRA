@@ -1,0 +1,169 @@
+{% extends 'frontend/base.html' %}
+{% block title %}Ajouter un enseignant - SIRA{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-container {
+        max-width: 700px;
+        margin: 40px auto;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+    .form-header {
+        background: linear-gradient(135deg, #2c5aa0, #4a7dbd);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 12px 12px 0 0;
+    }
+    .form-body {
+        padding: 30px;
+        background: white;
+    }
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+    }
+    .form-control:focus {
+        border-color: #2c5aa0;
+        box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.2);
+    }
+    label {
+        font-weight: 500;
+        color: #495057;
+    }
+    .btn-submit {
+        background: #2c5aa0;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    .btn-submit:hover {
+        background: #1a3a6e;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(26, 58, 110, 0.3);
+    }
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #2c5aa0;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="card form-container">
+    <div class="form-header">
+        <h4>
+            <i class="bi bi-person-plus"></i>
+            Ajouter un nouveau enseignant
+        </h4>
+    </div>
+
+    <div class="form-body">
+        <form id="enseignantForm">
+            {% csrf_token %}
+
+            <!-- Informations utilisateur -->
+            <h5>Informations personnelles</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="first_name" class="form-label">Prénom *</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="last_name" class="form-label">Nom *</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe *</label>
+                <input type="password" class="form-control" id="password" name="password" required minlength="8">
+                <small class="text-muted">Minimum 8 caractères</small>
+            </div>
+
+            <!-- Informations enseignant -->
+            <h5 class="mt-4">Profil enseignant</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="specialite" class="form-label">Spécialité *</label>
+                    <input type="text" class="form-control" id="specialite" name="specialite" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="bureau" class="form-label">Bureau</label>
+                    <input type="text" class="form-control" id="bureau" name="bureau">
+                </div>
+            </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="est_responsable" name="est_responsable">
+                <label class="form-check-label" for="est_responsable">
+                    Responsable de promotion
+                </label>
+            </div>
+
+            <!-- Bouton -->
+            <div class="d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-submit text-white">
+                    <i class="bi bi-save"></i> Enregistrer l'enseignant
+                </button>
+            </div>
+        </form>
+
+        <!-- Lien retour -->
+        <div class="text-center mt-3">
+            <a href="{% url 'dashboard' %}" class="back-link">
+                ← Retour au tableau de bord
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const form = document.getElementById('enseignantForm');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        if (!data.est_responsable) delete data.est_responsable;
+
+        try {
+            const response = await fetch('/api/auth/admin/create-enseignant/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('✅ Enseignant ajouté avec succès !');
+                form.reset();
+            } else {
+                let errors = Object.entries(result).map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(', ') : msgs}`).join('\n');
+                alert('❌ Erreur :\n' + errors);
+            }
+        } catch (error) {
+            alert('❌ Erreur réseau : ' + error.message);
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'frontend/base.html' %}
+{% block title %}Tableau de bord - Étudiant{% endblock %}
+
+{% block extra_css %}
+<style>
+    .welcome-card {
+        background: linear-gradient(135deg, #3a7ca5, #5ca9dd);
+        color: white;
+        border-radius: 12px;
+    }
+    .info-card {
+        border-left: 4px solid #3a7ca5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Bienvenue -->
+    <div class="col-12">
+        <div class="card welcome-card">
+            <div class="card-body">
+                <h3>
+                    <i class="bi bi-mortarboard"></i>
+                    Bonjour {{ user.first_name }} {{ user.last_name }}
+                </h3>
+                <p class="opacity-90">Espace étudiant • Matricule : {{ profile.matricule }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informations -->
+    <div class="col-md-6">
+        <div class="card info-card">
+            <div class="card-body">
+                <h5><i class="bi bi-person-vcard"></i> Informations</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Matricule :</strong> {{ profile.matricule }}</li>
+                    <li><strong>Email :</strong> {{ user.email }}</li>
+                    <li><strong>Téléphone :</strong> {{ profile.telephone|default:"Non renseigné" }}</li>
+                    <li><strong>Date de naissance :</strong> {{ profile.date_naissance|default:"–" }}</li>
+                    <li><strong>Lieu de naissance :</strong> {{ profile.lieu_naissance|default:"–" }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accès rapide -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5><i class="bi bi-link-45deg"></i> Accès rapide</h5>
+                <a href="#" class="btn btn-outline-primary btn-sm mb-2 w-100 text-start">
+                    <i class="bi bi-book"></i> Mes cours
+                </a>
+                <a href="#" class="btn btn-outline-success btn-sm mb-2 w-100 text-start">
+                    <i class="bi bi-file-earmark-bar-graph"></i> Mes résultats
+                </a>
+                <a href="#" class="btn btn-outline-info btn-sm w-100 text-start">
+                    <i class="bi bi-clipboard-check"></i> Mes inscriptions
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message -->
+    <div class="col-12">
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i>
+            Bienvenue dans votre espace étudiant. Consultez vos cours, résultats et inscriptions en temps réel.
+        </div>
+    </div>
+</div>
+{% endblock %}

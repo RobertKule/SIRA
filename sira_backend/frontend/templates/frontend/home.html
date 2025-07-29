@@ -1,0 +1,222 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}SIRA - Accueil{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center;
+        background-size: cover;
+        position: relative;
+        border-radius: 0 0 30px 30px;
+        overflow: hidden;
+        margin-bottom: 60px;
+    }
+    .hero-overlay {
+        background: rgba(26, 58, 110, 0.85);
+        padding: 120px 20px;
+        color: white;
+        text-align: center;
+    }
+    .feature-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-top: 4px solid #2c5aa0;
+    }
+    .feature-icon {
+        font-size: 3rem;
+        color: #2c5aa0;
+        margin-bottom: 1rem;
+    }
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c5aa0;
+    }
+    .btn-sira {
+        background: #2c5aa0;
+        border: none;
+        padding: 10px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    .btn-sira:hover {
+        background: #1a3a6e;
+        transform: scale(1.05);
+        color: white;
+    }
+    .floating {
+        animation: floating 3s ease-in-out infinite;
+    }
+    @keyframes floating {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-overlay">
+        <div class="container">
+            <h1 class="display-4 animate__animated animate__fadeInDown">
+                Bienvenue sur <strong>SIRA</strong>
+            </h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">
+                Système Informatique des Résultats Académiques<br>
+                Une plateforme sécurisée et efficace pour la gestion des étudiants, enseignants et résultats.
+            </p>
+            <a href="{% url 'login' %}" class="btn btn-light btn-lg mt-3 animate__animated animate__zoomIn animate__delay-2s">
+                <i class="bi bi-box-arrow-in-right"></i> Se connecter
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-5 text-primary">Fonctionnalités par profil</h2>
+    <div class="row g-4">
+        <!-- Étudiant -->
+        <div class="col-md-4">
+            <div class="feature-card text-center animate__animated animate__fadeInUp">
+                <i class="feature-icon bi bi-mortarboard-fill"></i>
+                <h4>Étudiant</h4>
+                <p>Consultez vos inscriptions, cours, notes et bulletins. Suivez votre progression académique en temps réel.</p>
+            </div>
+        </div>
+
+        <!-- Enseignant -->
+        <div class="col-md-4">
+            <div class="feature-card text-center animate__animated animate__fadeInUp animate__delay-0.2s">
+                <i class="feature-icon bi bi-journal-text"></i>
+                <h4>Enseignant</h4>
+                <p>Gérez vos cours, saisissez les notes, consultez vos promotions. Un espace pédagogique complet et intuitif.</p>
+            </div>
+        </div>
+
+        <!-- Administrateur -->
+        <div class="col-md-4">
+            <div class="feature-card text-center animate__animated animate__fadeInUp animate__delay-0.4s">
+                <i class="feature-icon bi bi-shield-check"></i>
+                <h4>Administrateur</h4>
+                <p>Gestion complète des utilisateurs, promotions, années académiques et résultats. Contrôle total du système.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="bg-light py-5 my-5 rounded-4 shadow-sm">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2>Une solution pensée pour l'excellence</h2>
+                <p>
+                    <strong>SIRA</strong> est une plateforme web moderne, sécurisée et évolutive, conçue pour simplifier la gestion académique dans les établissements d'enseignement supérieur.
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Gestion centralisée des étudiants et enseignants</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Calcul automatique des moyennes et mentions</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Accès sécurisé par rôle (JWT)</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> API REST moderne avec Django REST Framework</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://img.freepik.com/vecteurs-premium/groupe-etudiants-universite-illustration-vectorielle_628173-253.jpg" 
+                     alt="Campus SIRA" 
+                     class="img-fluid rounded shadow floating" 
+                     style="max-height: 350px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-5 text-primary">Notre impact</h2>
+    <div class="row text-center">
+        <div class="col-md-3 col-6">
+            <div class="card border-0">
+                <div class="card-body">
+                    <h3 class="stats-number" id="stat-students">0</h3>
+                    <p class="text-muted">Étudiants</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0">
+                <div class="card-body">
+                    <h3 class="stats-number" id="stat-teachers">0</h3>
+                    <p class="text-muted">Enseignants</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0">
+                <div class="card-body">
+                    <h3 class="stats-number" id="stat-courses">0</h3>
+                    <p class="text-muted">Cours</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0">
+                <div class="card-body">
+                    <h3 class="stats-number" id="stat-promos">0</h3>
+                    <p class="text-muted">Promotions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="text-center my-5">
+    <div class="p-5 bg-white rounded-4 shadow-sm d-inline-block">
+        <h3 class="text-primary">Prêt à gérer les résultats académiques autrement ?</h3>
+        <p class="lead text-muted">Connectez-vous pour accéder à votre espace personnalisé.</p>
+        <a href="{% url 'login' %}" class="btn btn-sira text-white">
+            <i class="bi bi-door-open"></i> Accéder à SIRA
+        </a>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Animation des chiffres
+    const animateValue = (element, start, end, duration) => {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            element.textContent = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        animateValue(document.getElementById('stat-students'), 0, 1342, 2000);
+        animateValue(document.getElementById('stat-teachers'), 0, 93, 1800);
+        animateValue(document.getElementById('stat-courses'), 0, 227, 2200);
+        animateValue(document.getElementById('stat-promos'), 0, 45, 1500);
+    });
+</script>
+{% endblock %}

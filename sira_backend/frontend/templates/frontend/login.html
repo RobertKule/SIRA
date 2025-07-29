@@ -1,0 +1,218 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Connexion - SIRA{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-blue: #1a3a6e;
+        --primary-light-blue: #2c5aa0;
+        --secondary-blue: #4361ee;
+        --light-bg: #f8f9fa;
+    }
+
+    .login-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 120px); /* Prend en compte navbar et footer */
+        padding: 2rem 0;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 420px;
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+    }
+
+    .login-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .login-header {
+        background: linear-gradient(135deg, var(--primary-blue), var(--primary-light-blue));
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .login-header i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .login-header h3 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+
+    .login-body {
+        padding: 2rem;
+        background: white;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: var(--secondary-blue);
+        box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.15);
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-login {
+        background: linear-gradient(135deg, var(--primary-blue), var(--primary-light-blue));
+        border: none;
+        padding: 0.75rem;
+        border-radius: 8px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .btn-login:hover {
+        background: linear-gradient(135deg, var(--primary-light-blue), var(--primary-blue));
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(44, 90, 160, 0.3);
+    }
+
+    .login-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    .login-footer a {
+        color: var(--primary-blue);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .login-footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+        .login-wrapper {
+            padding: 1rem;
+            min-height: calc(100vh - 100px);
+        }
+        
+        .login-body {
+            padding: 1.5rem;
+        }
+        
+        .login-header {
+            padding: 1.25rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-wrapper">
+    <div class="login-card">
+        <!-- Header -->
+        <div class="login-header">
+            <i class="bi bi-shield-lock"></i>
+            <h3>Connexion à SIRA</h3>
+        </div>
+
+        <!-- Body -->
+        <div class="login-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                
+                <!-- Display form errors at the top -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger mb-4">
+                        {% for error in form.non_field_errors %}
+                            <i class="bi bi-exclamation-circle-fill me-2"></i>{{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">
+                        <i class="bi bi-person-fill me-1"></i>Identifiant
+                    </label>
+                    <input type="text" 
+                           class="form-control {% if form.username.errors %}is-invalid{% endif %}" 
+                           id="{{ form.username.id_for_label }}" 
+                           name="{{ form.username.html_name }}" 
+                           placeholder="Email ou nom d'utilisateur"
+                           value="{{ form.username.value|default_if_none:'' }}"
+                           required>
+                    {% if form.username.errors %}
+                        <div class="invalid-feedback">
+                            <i class="bi bi-exclamation-circle-fill me-1"></i>
+                            {{ form.username.errors.0 }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-4">
+                    <label for="{{ form.password.id_for_label }}" class="form-label">
+                        <i class="bi bi-lock-fill me-1"></i>Mot de passe
+                    </label>
+                    <input type="password" 
+                           class="form-control {% if form.password.errors %}is-invalid{% endif %}" 
+                           id="{{ form.password.id_for_label }}" 
+                           name="{{ form.password.html_name }}" 
+                           placeholder="Votre mot de passe"
+                           required>
+                    {% if form.password.errors %}
+                        <div class="invalid-feedback">
+                            <i class="bi bi-exclamation-circle-fill me-1"></i>
+                            {{ form.password.errors.0 }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label small" for="rememberMe">
+                            Se souvenir de moi
+                        </label>
+                    </div>
+                    <a href="#" class="small text-primary">Mot de passe oublié ?</a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-login mb-3">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                    Se connecter
+                </button>
+
+                <!-- Additional Links -->
+                <div class="login-footer">
+                    <p class="mb-2">Vous n'avez pas de compte ? <a href="#">Contactez l'administrateur</a></p>
+                    <small>Système Informatique des Résultats Académiques</small>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

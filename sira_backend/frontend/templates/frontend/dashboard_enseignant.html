@@ -1,0 +1,73 @@
+{% extends 'frontend/base.html' %}
+{% block title %}Tableau de bord - Enseignant{% endblock %}
+
+{% block extra_css %}
+<style>
+    .welcome-card {
+        background: linear-gradient(135deg, #2c5aa0, #4a7dbd);
+        color: white;
+        border-radius: 12px;
+    }
+    .info-card {
+        border-left: 4px solid #2c5aa0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Bienvenue -->
+    <div class="col-12">
+        <div class="card welcome-card">
+            <div class="card-body">
+                <h3>
+                    <i class="bi bi-journal-bookmark"></i>
+                    Bonjour {{ user.first_name }} {{ user.last_name }}
+                </h3>
+                <p class="opacity-90">Espace enseignant • Spécialité : {{ profile.specialite }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profil -->
+    <div class="col-md-6">
+        <div class="card info-card">
+            <div class="card-body">
+                <h5><i class="bi bi-person-circle"></i> Profil</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Nom :</strong> {{ user.last_name }} {{ user.first_name }}</li>
+                    <li><strong>Email :</strong> {{ user.email }}</li>
+                    <li><strong>Spécialité :</strong> {{ profile.specialite }}</li>
+                    <li><strong>Bureau :</strong> {{ profile.bureau|default:"Non attribué" }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5><i class="bi bi-bell"></i> Actions</h5>
+                <a href="#" class="btn btn-outline-primary btn-sm mb-2 w-100 text-start">
+                    <i class="bi bi-file-earmark-text"></i> Saisir les notes
+                </a>
+                <a href="#" class="btn btn-outline-info btn-sm mb-2 w-100 text-start">
+                    <i class="bi bi-calendar-event"></i> Voir mon emploi du temps
+                </a>
+                <a href="#" class="btn btn-outline-secondary btn-sm w-100 text-start">
+                    <i class="bi bi-people"></i> Mes étudiants
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message -->
+    <div class="col-12">
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i>
+            Bienvenue dans votre espace enseignant. Vous pouvez gérer vos cours, saisir les notes et suivre vos promotions.
+        </div>
+    </div>
+</div>
+{% endblock %}

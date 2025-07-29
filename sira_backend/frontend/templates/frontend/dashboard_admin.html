@@ -1,0 +1,139 @@
+{% extends 'frontend/base.html' %}
+{% block title %}Tableau de bord - Administrateur{% endblock %}
+
+{% block extra_css %}
+<style>
+    .welcome-card {
+        background: linear-gradient(135deg, #1a3a6e, #2c5aa0);
+        color: white;
+        border-radius: 12px;
+    }
+    .stat-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+    .icon-bg {
+        font-size: 2rem;
+        background: #e7f0ff;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2c5aa0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Profil Admin -->
+    <div class="col-12">
+        <div class="card welcome-card text-white">
+            <div class="card-body p-4">
+                <h3 class="mb-1">
+                    <i class="bi bi-shield-lock"></i>
+                    Bonjour Administrateur {{ user.first_name }}
+                </h3>
+                <p class="mb-0 opacity-90">Gestion complète du système académique</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Infos -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5><i class="bi bi-person-badge"></i> Informations</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Nom :</strong> {{ user.last_name }} {{ user.first_name }}</li>
+                    <li><strong>Email :</strong> {{ user.email }}</li>
+                    <li><strong>Statut :</strong> Administrateur système</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5><i class="bi bi-tools"></i> Actions rapides</h5>
+                <a href="{% url 'admin_create_etudiant' %}" class="btn btn-outline-primary btn-sm mb-2 w-100 text-start">    <i class="bi bi-person-add"></i> Ajouter un étudiant
+                </a>
+                <a href="{% url 'admin_create_enseignant' %}" class="btn btn-outline-success btn-sm mb-2 w-100 text-start">    <i class="bi bi-person-plus"></i> Ajouter un enseignant
+                </a>
+                <a href="/admin/" class="btn btn-outline-warning btn-sm w-100 text-start">
+                    <i class="bi bi-gear"></i> Administration Django
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistiques (à lier plus tard à l’API) -->
+    <div class="col-md-3 col-6">
+        <div class="card stat-card">
+            <div class="card-body text-center">
+                <div class="icon-bg mx-auto mb-3"><i class="bi bi-mortarboard"></i></div>
+                <h5 id="stat-students">0</h5>
+                <p class="text-muted mb-0">Étudiants</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card stat-card">
+            <div class="card-body text-center">
+                <div class="icon-bg mx-auto mb-3"><i class="bi bi-journal-text"></i></div>
+                <h5 id="stat-teachers">0</h5>
+                <p class="text-muted mb-0">Enseignants</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card stat-card">
+            <div class="card-body text-center">
+                <div class="icon-bg mx-auto mb-3"><i class="bi bi-book"></i></div>
+                <h5 id="stat-courses">0</h5>
+                <p class="text-muted mb-0">Cours</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card stat-card">
+            <div class="card-body text-center">
+                <div class="icon-bg mx-auto mb-3"><i class="bi bi-people"></i></div>
+                <h5 id="stat-promos">0</h5>
+                <p class="text-muted mb-0">Promotions</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Animation des chiffres (à remplacer par appel API plus tard)
+    const animateValue = (element, end) => {
+        let start = 0;
+        const duration = 2000;
+        const stepTime = Math.abs(Math.floor(duration / end));
+        const timer = setInterval(() => {
+            start += 1;
+            element.textContent = start;
+            if (start === end) clearInterval(timer);
+        }, stepTime);
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        animateValue(document.getElementById('stat-students'), 1342);
+        animateValue(document.getElementById('stat-teachers'), 93);
+        animateValue(document.getElementById('stat-courses'), 227);
+        animateValue(document.getElementById('stat-promos'), 45);
+    });
+</script>
+{% endblock %}
