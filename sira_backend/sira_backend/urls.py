@@ -7,4 +7,5 @@ urlpatterns = [
     path('gestion/', include('gestion_academique.urls')),
     path('communication/', include('communication.urls')),
     path('docs/', include('docs.urls')),
+    path('', include('frontend.urls')),
 ]

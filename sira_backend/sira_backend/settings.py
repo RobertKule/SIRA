@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',  # Pour autoriser les requêtes du frontend
     
-    'authentification',          # Votre app
-    'gestion_academique',        # Votre app
-    
-    'docs',
+    'authentification',          # pour l'authentification
+    'gestion_academique',        # pour la gestion académique
+    'frontend',              # Pour servir le frontend
+    'docs', # Pour la documentation
+    # 'sira_backend',  # Pour les configurations du backend
     'communication',  # Pour les notifications
 ]
 
@@ -67,7 +68,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'docs/templates',
-            BASE_DIR/ 'templates',],
+            BASE_DIR/ 'templates',
+            BASE_DIR / 'frontend/templates',
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
